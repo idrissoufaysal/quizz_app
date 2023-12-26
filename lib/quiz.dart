@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:text/components/button.dart';
+import 'package:text/data/questions.dart';
+import 'models/quiz_question.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -9,8 +11,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  var currentQuestionIndex = 0;
+
+  void answersQuestion() {
+    setState(() {
+      currentQuestionIndex++;
+      if(currentQuestionIndex==4){
+        setState(() {
+          currentQuestionIndex=0;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = questions[currentQuestionIndex];
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -18,23 +34,15 @@ class _QuizPageState extends State<QuizPage> {
           const SizedBox(
             height: 20,
           ),
-          const Text('Question...'),
+          Text(currentQuestion.text),
           const SizedBox(
             height: 30,
           ),
-          Button('Reponse 1', () {}),
-          const SizedBox(
-            height: 10,
-          ),
-          Button('Reponse 2', () {}),
-          const SizedBox(
-            height: 10,
-          ),
-          Button('Reponse 3', () {}),
-          const SizedBox(
-            height: 10,
-          ),
-          Button('Reponse 4', () {}),
+          ...currentQuestion.answers.map(
+            (answer) => Button(answer, answersQuestion),
+           ),
+         
+         
         ],
       ),
     );

@@ -7,14 +7,19 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    return ElevatedButton(
-      onPressed: onTap, 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.indigo[900],
-        foregroundColor: Colors.white,
-        padding:const EdgeInsets.all(20),
-        shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
-      ),
-      child: Text(text));
+    return Container(
+      width: double.infinity,
+      margin:const EdgeInsets.symmetric(horizontal: 30 ),
+      child: ElevatedButton(
+        onPressed: onTap, 
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.indigo[900],
+          foregroundColor: Colors.white,
+          //padding:const EdgeInsets.all(20),
+          //shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+        ),
+        child: Text(text,
+        textAlign: TextAlign.center,)),
+    );
   }
 }
